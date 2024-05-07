@@ -30,6 +30,7 @@ jobs:
         dotnet publish --configuration Release --output ./publish
         cd publish
         zip -r Document.Create.zip .
+        cd ../../../
         mv Document.Create.zip ../Document.Create.zip
 
     - name: Deploy Document.Create to AWS Lambda
