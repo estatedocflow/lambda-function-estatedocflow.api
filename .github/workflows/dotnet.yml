@@ -22,24 +22,45 @@ jobs:
         dotnet-version: '8.0.x'
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Publish
-      run: dotnet publish --configuration Release --output ./publish
-
-    - name: Create deployment package
+      
+    - name: Build and Publish Document.Create
       run: |
+        cd path/to/Document.Create
+        dotnet build --configuration Release --no-restore
+        dotnet publish --configuration Release --output ./publish
         cd publish
-        zip -r deployment-package.zip .
-        mv deployment-package.zip ../deployment-package.zip
-    
-    - name: Deploy to AWS Lambda
+        zip -r Document.Create.zip .
+        mv Document.Create.zip ../../Document.Create.zip
+
+    - name: Deploy Document.Create to AWS Lambda
       uses: appleboy/lambda-action@v0.2.0
       with:
         aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws_region: ${{ secrets.AWS_SECRET_REGION }}
         function_name: estate-doc-flow-action
-        zip_file: ./deployment-package.zip 
+        zip_file: ./Document.Create.zip
+    
+    
+    
+#    - name: Build
+#      run: dotnet build --no-restore
+#    - name: Test
+#      run: dotnet test --no-build --verbosity normal
+#    - name: Publish
+#      run: dotnet publish --configuration Release --output ./publish
+#
+#    - name: Create deployment package
+#      run: |
+#        cd publish
+#        zip -r deployment-package.zip .
+#        mv deployment-package.zip ../deployment-package.zip
+#    
+#    - name: Deploy to AWS Lambda
+#      uses: appleboy/lambda-action@v0.2.0
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#        aws_region: ${{ secrets.AWS_SECRET_REGION }}
+#        function_name: estate-doc-flow-action
+#        zip_file: ./deployment-package.zip 
