@@ -1,8 +1,8 @@
 using System.Net;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
-using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
+using Amazon.Lambda.Core;
 using Models;
 using Newtonsoft.Json;
 
@@ -13,7 +13,7 @@ namespace Document.Create;
 
 public class Function
 {
-    public async Task<APIGatewayHttpApiV2ProxyResponse> CreateBookingAsync(APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context)
+    public async Task<APIGatewayHttpApiV2ProxyResponse> CreateDocumentAsync(APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context)
     {
         try
         {
@@ -48,7 +48,7 @@ public class Function
         {
             return new APIGatewayHttpApiV2ProxyResponse
             {
-                Body = ex.Message,
+                Body = ex.Message + " inner exception: " + ex.InnerException,
                 StatusCode = (int)HttpStatusCode.InternalServerError
             };
         }

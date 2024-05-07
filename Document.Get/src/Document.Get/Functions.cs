@@ -11,7 +11,7 @@ namespace Document.Get;
 
 public class Function
 {
-    public async Task<DocumentDto?> GetBookingByIdAsync(APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context)
+    public async Task<DocumentDto?> GetDocumentByIdAsync(APIGatewayHttpApiV2ProxyRequest request, ILambdaContext context)
     {
         try
         {

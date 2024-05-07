@@ -12,7 +12,7 @@ namespace Document.Delete;
 
 public class Function
 {
-    public async Task<APIGatewayHttpApiV2ProxyResponse> DeleteBookingAsync(APIGatewayHttpApiV2ProxyRequest? request,
+    public async Task<APIGatewayHttpApiV2ProxyResponse> DeleteDocumentAsync(APIGatewayHttpApiV2ProxyRequest? request,
         ILambdaContext context)
     {
         try
