@@ -25,7 +25,7 @@ jobs:
       
     - name: Build and Publish Document.Create
       run: |
-        cd path/to/Document.Create
+        cd Document.Create/src/Document.Create
         dotnet build --configuration Release --no-restore
         dotnet publish --configuration Release --output ./publish
         cd publish
